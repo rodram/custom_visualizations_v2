@@ -11,7 +11,7 @@ import {
 declare var looker: Looker
 
 interface TreemapVisualization extends VisualizationDefinition {
-  svg?: d3.Selection<SVGElement, {}, any, any>,
+  svg?: d3.Selection<SVGElement, {}, any, any>
 }
 
 // recursively create children array
@@ -71,7 +71,7 @@ const vis: TreemapVisualization = {
   },
   // Set up the initial state of the visualization
   create: function (element, config) {
-    this.svg = d3.select(element).append('svg')
+    d3.select(element).append('svg')
   },
   // Render in response to the data or settings changing
   update: function (data, element, config, queryResponse) {
@@ -153,19 +153,19 @@ const vis: TreemapVisualization = {
           })
       })
 
-    cell.append('rect')
-      .attr('id', (d, i) => 'rect-' + i)
-      .attr('width', (d: any) => d.x1 - d.x0)
-      .attr('height', (d: any) => d.y1 - d.y0)
-      .style('fill', (d) => {
-        if (d.depth === 0) return 'none'
-        const ancestor: string = d.ancestors().map((p) => p.data.name).slice(-2, -1)[0]
-        const colors: any[] = [color(ancestor), '#ddd']
-        const scale = d3.scaleLinear()
-          .domain([1, 6.5])
-          .range(colors)
-        return scale(d.depth)
-      })
+    // cell.append('rect')
+    //   .attr('id', (d, i) => 'rect-' + i)
+    //   .attr('width', (d: any) => d.x1 - d.x0)
+    //   .attr('height', (d: any) => d.y1 - d.y0)
+    //   .style('fill', (d) => {
+    //     if (d.depth === 0) return 'none'
+    //     const ancestor: string = d.ancestors().map((p) => p.data.name).slice(-2, -1)[0]
+    //     const colors: any[] = [color(ancestor), '#ddd']
+    //     const scale = d3.scaleLinear()
+    //       .domain([1, 6.5])
+    //       .range(colors)
+    //     return scale(d.depth)
+    //   })
 
     cell.append('clipPath')
       .attr('id', (d, i) => 'clip-' + i)
